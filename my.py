@@ -42,21 +42,26 @@ def waitime_predictor(
     geolocation_state_seller,
     distance,
 ):
-    prediction = voting_model.predict(
-        np.array(
-            [[
-                purchase_dow,
-                purchase_month,
-                year,
-                product_size_cm3,
-                product_weight_g,
-                geolocation_state_customer,
-                geolocation_state_seller,
-                distance,
-            ]]
-        )
+    # Convert to proper data type
+    input_features = np.array(
+        [
+            [
+                int(purchase_dow),
+                int(purchase_month),
+                int(year),
+                float(product_size_cm3),
+                float(product_weight_g),
+                int(geolocation_state_customer),
+                int(geolocation_state_seller),
+                float(distance),
+            ]
+        ],
+        dtype=np.float32  # Ensures compatibility across models
     )
+
+    prediction = voting_model.predict(input_features)
     return round(prediction[0])
+
 
 # Sidebar input UI
 with st.sidebar:
