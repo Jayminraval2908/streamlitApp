@@ -105,7 +105,7 @@ with st.container():
         "Distance": ["247.94", "250.35", "4.915"],
     }
 
-    df = pd.DataFrame(data)  # <--- You missed this line
+    df = pd.DataFrame(data)  
 
     st.header("Sample Dataset")
     st.write(df)
